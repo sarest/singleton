@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<target id="prueba">
+    <segments>
+        <segment type="curve">
+            <parameters>
+                <parameter id="angle">90</parameter>
+                <parameter id="radius">50</parameter>
+                <parameter id="acceleration">1</parameter>
+            </parameters>
+        </segment>
+        <segment type="straight">
+            <parameters>
+                <parameter id="length">10</parameter>
+                <parameter id="velocity">100</parameter>
+            </parameters>
+        </segment>
+    </segments>
+</target>

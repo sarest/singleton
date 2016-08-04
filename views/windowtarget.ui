@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WindowTarget</class>
+ <widget class="QMainWindow" name="WindowTarget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1062</width>
+    <height>652</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Create Target</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_7">
+    <item row="0" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Target Name</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="target_name"/>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="bLoad">
+        <property name="text">
+         <string>LOAD</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="bSave">
+        <property name="text">
+         <string>SAVE</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="0" column="3" rowspan="4">
+     <layout class="QGridLayout" name="view_layout"/>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Start Velocity</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="start_velocity"/>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0" colspan="3">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Segment Type</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="straight_tab">
+         <attribute name="title">
+          <string>Straight</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="0">
+             <widget class="QRadioButton" name="rAcceleration_straight">
+              <property name="text">
+               <string>Acceleration</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QRadioButton" name="rVelocity_straight">
+              <property name="text">
+               <string>Velocity</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="bConfirm_straight">
+              <property name="text">
+               <string>CONFIRM</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="straight_velocity"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="straight_length"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>End velocity in km/h</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Acceleration in m/s2</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Length in m</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="straight_acceleration"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="curve_tab">
+         <attribute name="title">
+          <string>Curve</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QRadioButton" name="rAcceleration_curve">
+              <property name="text">
+               <string>Acceleration</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QRadioButton" name="rVelocity_curve">
+              <property name="text">
+               <string>Velocity</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="bConfirm_curve">
+              <property name="text">
+               <string>CONFIRM</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="1">
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="curve_acceleration"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="curve_angle"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Acceleration in m/s2</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Radius in m</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Angle in degree</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="curve_radius"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>End velocity in km/h</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="curve_velocity"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="bClearTable">
+      <property name="text">
+       <string>Clear Target</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QPushButton" name="bDeleteLast">
+      <property name="text">
+       <string>Remove Last</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="4">
+     <layout class="QGridLayout" name="table_layout" columnminimumwidth="0">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1062</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSet_Path">
+    <property name="title">
+     <string>Set Path</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuCrashpoint">
+    <property name="title">
+     <string>Crashpoint</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuLimitations">
+    <property name="title">
+     <string>Limitations</string>
+    </property>
+   </widget>
+   <addaction name="menuSet_Path"/>
+   <addaction name="menuCrashpoint"/>
+   <addaction name="menuLimitations"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>target_name</tabstop>
+  <tabstop>start_velocity</tabstop>
+  <tabstop>straight_length</tabstop>
+  <tabstop>straight_acceleration</tabstop>
+  <tabstop>straight_velocity</tabstop>
+  <tabstop>curve_angle</tabstop>
+  <tabstop>curve_radius</tabstop>
+  <tabstop>curve_acceleration</tabstop>
+  <tabstop>curve_velocity</tabstop>
+  <tabstop>rAcceleration_curve</tabstop>
+  <tabstop>rVelocity_curve</tabstop>
+  <tabstop>bConfirm_curve</tabstop>
+  <tabstop>rVelocity_straight</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>rAcceleration_straight</tabstop>
+  <tabstop>bConfirm_straight</tabstop>
+  <tabstop>bLoad</tabstop>
+  <tabstop>bClearTable</tabstop>
+  <tabstop>bDeleteLast</tabstop>
+  <tabstop>bSave</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
