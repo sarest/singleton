@@ -9,8 +9,7 @@ Files::Files()
 void Files::xml_writer(QString fileName)
 {
     qDebug()<<"xml_writer";
-    Mediator *mediator = Mediator::Instance();
-    Target *mytarget = mediator->getTarget();
+    Target *mytarget = Mediator::Instance()->getTarget();
     QList<Segment*> segment_list = mytarget->getSegment();
 
     QFile file(fileName);
@@ -97,7 +96,7 @@ Target *Files::xml_reader(QString fileName)
     if(segment_nodelist.count()>0){
         for(int i=0; i<segment_nodelist.count();i++){
             Segment *mysegment = new Segment;
-            QString length="",angle="",radius="",acceleration="",velocity="";
+            QString length="",angle="",radius="",acceleration="",velocity="",x="",y="",time="";
             QDomNodeList segment_parameters = segment_nodelist.at(i).firstChild().childNodes();
             for(int j=0; j<segment_parameters.count(); j++){
                 if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="length")
@@ -112,9 +111,9 @@ Target *Files::xml_reader(QString fileName)
                     velocity = segment_parameters.at(j).toElement().text();
             }
             if(segment_nodelist.at(i).attributes().namedItem("type").nodeValue()=="curve")
-                mysegment->setValues_curve("curve",angle,radius,acceleration,velocity);
+                mysegment->setValues_curve("curve",angle,radius,acceleration,velocity,x,y,time);
             else
-                mysegment->setValues_straight("straight",length,acceleration,velocity);
+                mysegment->setValues_straight("straight",length,acceleration,velocity,x,y,time);
 
             mytarget->addSegment(mysegment);
         }

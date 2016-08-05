@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QTableWidget>
+#include <QGraphicsView>
 
 #include "myqgraphicsview.h"
 
@@ -38,11 +39,14 @@ private:
     void initTable();
     void cleanValues();
     void loadTable();
-    void addRow(QString acceleration, QString velocity, QString radius);
+    void addRow(QString acceleration, QString velocity, QString radius, QString x, QString y, QString time);
     bool checkStartVelocity();
-    QTableWidget *mytable = new QTableWidget;
-    MyQGraphicsView *view = new MyQGraphicsView;
+    QTableWidget *mytable;
+    MyQGraphicsView *view;
+    void drawStraight();
+    void drawCurve();
 
+    void set_grid();
 };
 
 #endif // WINDOWTARGET_H

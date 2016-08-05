@@ -12,10 +12,14 @@ public:
     void addSegment(Segment *segment_instance){segment_list.append(segment_instance);}
     QList<Segment*> getSegment(){return segment_list;}
     void setID(QString id){target_id = id;}
+    void setStartVelocity(QString velocity){start_velocity = velocity;}
     QString getID(){return target_id;}
+    QString getStartVelocity(){return start_velocity;}
+    void deleteTarget();
+    void deleteLastSegment();
 
 private:
-    QString target_id;
+    QString target_id,start_velocity;
     QList<Segment*> segment_list;
 };
 

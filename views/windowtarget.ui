@@ -60,7 +60,18 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="start_velocity"/>
+       <widget class="QLineEdit" name="start_velocity">
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_11">
+        <property name="text">
+         <string>km/h</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -83,34 +94,6 @@
           <string>Straight</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_2">
-            <item row="0" column="0">
-             <widget class="QRadioButton" name="rAcceleration_straight">
-              <property name="text">
-               <string>Acceleration</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QRadioButton" name="rVelocity_straight">
-              <property name="text">
-               <string>Velocity</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QPushButton" name="bConfirm_straight">
-              <property name="text">
-               <string>CONFIRM</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="0" column="1">
            <layout class="QGridLayout" name="gridLayout">
             <item row="2" column="1">
@@ -145,17 +128,10 @@
             </item>
            </layout>
           </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="curve_tab">
-         <attribute name="title">
-          <string>Curve</string>
-         </attribute>
-         <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
-           <layout class="QGridLayout" name="gridLayout_4">
+           <layout class="QGridLayout" name="gridLayout_2">
             <item row="0" column="0">
-             <widget class="QRadioButton" name="rAcceleration_curve">
+             <widget class="QRadioButton" name="rAcceleration_straight">
               <property name="text">
                <string>Acceleration</string>
               </property>
@@ -165,14 +141,14 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QRadioButton" name="rVelocity_curve">
+             <widget class="QRadioButton" name="rVelocity_straight">
               <property name="text">
                <string>Velocity</string>
               </property>
              </widget>
             </item>
             <item row="2" column="0">
-             <widget class="QPushButton" name="bConfirm_curve">
+             <widget class="QPushButton" name="bConfirm_straight">
               <property name="text">
                <string>CONFIRM</string>
               </property>
@@ -180,6 +156,39 @@
             </item>
            </layout>
           </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="invalid_segment_label">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>9</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:red;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="curve_tab">
+         <attribute name="title">
+          <string>Curve</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="1">
            <layout class="QGridLayout" name="gridLayout_5">
             <item row="2" column="1">
@@ -223,6 +232,59 @@
              <widget class="QLineEdit" name="curve_velocity"/>
             </item>
            </layout>
+          </item>
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="0" column="0">
+             <widget class="QRadioButton" name="rAcceleration_curve">
+              <property name="text">
+               <string>Acceleration</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QRadioButton" name="rVelocity_curve">
+              <property name="text">
+               <string>Velocity</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="bConfirm_curve">
+              <property name="text">
+               <string>CONFIRM</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="invalid_segment_label_curve">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color:red;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

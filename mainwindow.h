@@ -30,6 +30,8 @@ private slots:
 
     void on_rManual_clicked();
 
+    void on_bReferencePosition_clicked();
+
 private:
     Ui::MainWindow *ui;
     bool communication_enabled = false;

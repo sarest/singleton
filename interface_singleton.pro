@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     views/windowtarget.cpp \
     items/target.cpp \
     items/segment.cpp \
-    views/myqgraphicsview.cpp
+    views/myqgraphicsview.cpp \
+    views/position_dialog.cpp \
+    items/position.cpp
 
 HEADERS  += mainwindow.h \
     mediator.h \
@@ -29,7 +31,10 @@ HEADERS  += mainwindow.h \
     views/windowtarget.h \
     items/target.h \
     items/segment.h \
-    views/myqgraphicsview.h
+    views/myqgraphicsview.h \
+    views/position_dialog.h \
+    items/position.h
 
 FORMS    += mainwindow.ui \
-    views/windowtarget.ui
+    views/windowtarget.ui \
+    views/position_dialog.ui

@@ -45,15 +45,12 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_6;
     QLineEdit *start_velocity;
+    QLabel *label_11;
     QVBoxLayout *verticalLayout;
     QLabel *label_2;
     QTabWidget *tabWidget;
     QWidget *straight_tab;
     QGridLayout *gridLayout_3;
-    QGridLayout *gridLayout_2;
-    QRadioButton *rAcceleration_straight;
-    QRadioButton *rVelocity_straight;
-    QPushButton *bConfirm_straight;
     QGridLayout *gridLayout;
     QLineEdit *straight_velocity;
     QLineEdit *straight_length;
@@ -61,12 +58,13 @@ public:
     QLabel *label_4;
     QLabel *label_3;
     QLineEdit *straight_acceleration;
+    QGridLayout *gridLayout_2;
+    QRadioButton *rAcceleration_straight;
+    QRadioButton *rVelocity_straight;
+    QPushButton *bConfirm_straight;
+    QLabel *invalid_segment_label;
     QWidget *curve_tab;
     QGridLayout *gridLayout_6;
-    QGridLayout *gridLayout_4;
-    QRadioButton *rAcceleration_curve;
-    QRadioButton *rVelocity_curve;
-    QPushButton *bConfirm_curve;
     QGridLayout *gridLayout_5;
     QLineEdit *curve_acceleration;
     QLineEdit *curve_angle;
@@ -76,6 +74,11 @@ public:
     QLineEdit *curve_radius;
     QLabel *label_10;
     QLineEdit *curve_velocity;
+    QGridLayout *gridLayout_4;
+    QRadioButton *rAcceleration_curve;
+    QRadioButton *rVelocity_curve;
+    QPushButton *bConfirm_curve;
+    QLabel *invalid_segment_label_curve;
     QPushButton *bClearTable;
     QPushButton *bDeleteLast;
     QGridLayout *table_layout;
@@ -141,6 +144,11 @@ public:
 
         horizontalLayout_3->addWidget(start_velocity);
 
+        label_11 = new QLabel(centralwidget);
+        label_11->setObjectName(QStringLiteral("label_11"));
+
+        horizontalLayout_3->addWidget(label_11);
+
 
         gridLayout_7->addLayout(horizontalLayout_3, 1, 0, 1, 2);
 
@@ -157,27 +165,6 @@ public:
         straight_tab->setObjectName(QStringLiteral("straight_tab"));
         gridLayout_3 = new QGridLayout(straight_tab);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        gridLayout_2 = new QGridLayout();
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        rAcceleration_straight = new QRadioButton(straight_tab);
-        rAcceleration_straight->setObjectName(QStringLiteral("rAcceleration_straight"));
-        rAcceleration_straight->setChecked(true);
-
-        gridLayout_2->addWidget(rAcceleration_straight, 0, 0, 1, 1);
-
-        rVelocity_straight = new QRadioButton(straight_tab);
-        rVelocity_straight->setObjectName(QStringLiteral("rVelocity_straight"));
-
-        gridLayout_2->addWidget(rVelocity_straight, 1, 0, 1, 1);
-
-        bConfirm_straight = new QPushButton(straight_tab);
-        bConfirm_straight->setObjectName(QStringLiteral("bConfirm_straight"));
-
-        gridLayout_2->addWidget(bConfirm_straight, 2, 0, 1, 1);
-
-
-        gridLayout_3->addLayout(gridLayout_2, 0, 0, 1, 1);
-
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         straight_velocity = new QLineEdit(straight_tab);
@@ -213,32 +200,45 @@ public:
 
         gridLayout_3->addLayout(gridLayout, 0, 1, 1, 1);
 
+        gridLayout_2 = new QGridLayout();
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        rAcceleration_straight = new QRadioButton(straight_tab);
+        rAcceleration_straight->setObjectName(QStringLiteral("rAcceleration_straight"));
+        rAcceleration_straight->setChecked(true);
+
+        gridLayout_2->addWidget(rAcceleration_straight, 0, 0, 1, 1);
+
+        rVelocity_straight = new QRadioButton(straight_tab);
+        rVelocity_straight->setObjectName(QStringLiteral("rVelocity_straight"));
+
+        gridLayout_2->addWidget(rVelocity_straight, 1, 0, 1, 1);
+
+        bConfirm_straight = new QPushButton(straight_tab);
+        bConfirm_straight->setObjectName(QStringLiteral("bConfirm_straight"));
+
+        gridLayout_2->addWidget(bConfirm_straight, 2, 0, 1, 1);
+
+
+        gridLayout_3->addLayout(gridLayout_2, 0, 0, 1, 1);
+
+        invalid_segment_label = new QLabel(straight_tab);
+        invalid_segment_label->setObjectName(QStringLiteral("invalid_segment_label"));
+        invalid_segment_label->setMaximumSize(QSize(16777215, 40));
+        QFont font;
+        font.setPointSize(9);
+        font.setBold(true);
+        font.setWeight(75);
+        invalid_segment_label->setFont(font);
+        invalid_segment_label->setStyleSheet(QStringLiteral("color:red;"));
+        invalid_segment_label->setAlignment(Qt::AlignCenter);
+
+        gridLayout_3->addWidget(invalid_segment_label, 1, 0, 1, 2);
+
         tabWidget->addTab(straight_tab, QString());
         curve_tab = new QWidget();
         curve_tab->setObjectName(QStringLiteral("curve_tab"));
         gridLayout_6 = new QGridLayout(curve_tab);
         gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
-        gridLayout_4 = new QGridLayout();
-        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        rAcceleration_curve = new QRadioButton(curve_tab);
-        rAcceleration_curve->setObjectName(QStringLiteral("rAcceleration_curve"));
-        rAcceleration_curve->setChecked(true);
-
-        gridLayout_4->addWidget(rAcceleration_curve, 0, 0, 1, 1);
-
-        rVelocity_curve = new QRadioButton(curve_tab);
-        rVelocity_curve->setObjectName(QStringLiteral("rVelocity_curve"));
-
-        gridLayout_4->addWidget(rVelocity_curve, 1, 0, 1, 1);
-
-        bConfirm_curve = new QPushButton(curve_tab);
-        bConfirm_curve->setObjectName(QStringLiteral("bConfirm_curve"));
-
-        gridLayout_4->addWidget(bConfirm_curve, 2, 0, 1, 1);
-
-
-        gridLayout_6->addLayout(gridLayout_4, 0, 0, 1, 1);
-
         gridLayout_5 = new QGridLayout();
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         curve_acceleration = new QLineEdit(curve_tab);
@@ -283,6 +283,39 @@ public:
 
 
         gridLayout_6->addLayout(gridLayout_5, 0, 1, 1, 1);
+
+        gridLayout_4 = new QGridLayout();
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        rAcceleration_curve = new QRadioButton(curve_tab);
+        rAcceleration_curve->setObjectName(QStringLiteral("rAcceleration_curve"));
+        rAcceleration_curve->setChecked(true);
+
+        gridLayout_4->addWidget(rAcceleration_curve, 0, 0, 1, 1);
+
+        rVelocity_curve = new QRadioButton(curve_tab);
+        rVelocity_curve->setObjectName(QStringLiteral("rVelocity_curve"));
+
+        gridLayout_4->addWidget(rVelocity_curve, 1, 0, 1, 1);
+
+        bConfirm_curve = new QPushButton(curve_tab);
+        bConfirm_curve->setObjectName(QStringLiteral("bConfirm_curve"));
+
+        gridLayout_4->addWidget(bConfirm_curve, 2, 0, 1, 1);
+
+
+        gridLayout_6->addLayout(gridLayout_4, 0, 0, 1, 1);
+
+        invalid_segment_label_curve = new QLabel(curve_tab);
+        invalid_segment_label_curve->setObjectName(QStringLiteral("invalid_segment_label_curve"));
+        invalid_segment_label_curve->setMaximumSize(QSize(16777215, 40));
+        QFont font1;
+        font1.setBold(true);
+        font1.setWeight(75);
+        invalid_segment_label_curve->setFont(font1);
+        invalid_segment_label_curve->setStyleSheet(QStringLiteral("color:red;"));
+        invalid_segment_label_curve->setAlignment(Qt::AlignCenter);
+
+        gridLayout_6->addWidget(invalid_segment_label_curve, 1, 0, 1, 2);
 
         tabWidget->addTab(curve_tab, QString());
 
@@ -360,21 +393,25 @@ public:
         bLoad->setText(QApplication::translate("WindowTarget", "LOAD", 0));
         bSave->setText(QApplication::translate("WindowTarget", "SAVE", 0));
         label_6->setText(QApplication::translate("WindowTarget", "Start Velocity", 0));
+        start_velocity->setText(QApplication::translate("WindowTarget", "0", 0));
+        label_11->setText(QApplication::translate("WindowTarget", "km/h", 0));
         label_2->setText(QApplication::translate("WindowTarget", "Segment Type", 0));
-        rAcceleration_straight->setText(QApplication::translate("WindowTarget", "Acceleration", 0));
-        rVelocity_straight->setText(QApplication::translate("WindowTarget", "Velocity", 0));
-        bConfirm_straight->setText(QApplication::translate("WindowTarget", "CONFIRM", 0));
         label_5->setText(QApplication::translate("WindowTarget", "End velocity in km/h", 0));
         label_4->setText(QApplication::translate("WindowTarget", "Acceleration in m/s2", 0));
         label_3->setText(QApplication::translate("WindowTarget", "Length in m", 0));
+        rAcceleration_straight->setText(QApplication::translate("WindowTarget", "Acceleration", 0));
+        rVelocity_straight->setText(QApplication::translate("WindowTarget", "Velocity", 0));
+        bConfirm_straight->setText(QApplication::translate("WindowTarget", "CONFIRM", 0));
+        invalid_segment_label->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(straight_tab), QApplication::translate("WindowTarget", "Straight", 0));
-        rAcceleration_curve->setText(QApplication::translate("WindowTarget", "Acceleration", 0));
-        rVelocity_curve->setText(QApplication::translate("WindowTarget", "Velocity", 0));
-        bConfirm_curve->setText(QApplication::translate("WindowTarget", "CONFIRM", 0));
         label_7->setText(QApplication::translate("WindowTarget", "Acceleration in m/s2", 0));
         label_8->setText(QApplication::translate("WindowTarget", "Radius in m", 0));
         label_9->setText(QApplication::translate("WindowTarget", "Angle in degree", 0));
         label_10->setText(QApplication::translate("WindowTarget", "End velocity in km/h", 0));
+        rAcceleration_curve->setText(QApplication::translate("WindowTarget", "Acceleration", 0));
+        rVelocity_curve->setText(QApplication::translate("WindowTarget", "Velocity", 0));
+        bConfirm_curve->setText(QApplication::translate("WindowTarget", "CONFIRM", 0));
+        invalid_segment_label_curve->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(curve_tab), QApplication::translate("WindowTarget", "Curve", 0));
         bClearTable->setText(QApplication::translate("WindowTarget", "Clear Target", 0));
         bDeleteLast->setText(QApplication::translate("WindowTarget", "Remove Last", 0));

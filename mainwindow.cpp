@@ -19,18 +19,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_bNewTarget_clicked()
 {
-    Mediator *mediator = Mediator::Instance();
-    mediator->showWindowTarget();
+    Mediator::Instance()->showWindowTarget();
 }
 
 void MainWindow::on_bLoadTarget_clicked()
 {
     QWidget *ventana_load = new QWidget;
     QString fileName = QFileDialog::getOpenFileName(ventana_load,"Open file",QDir::currentPath(),"XML (*.xml)");
-    Mediator *mediator = Mediator::Instance();
-    Files *mydoc = mediator->getFiles();
+    Files *mydoc = Mediator::Instance()->getFiles();
     Target *mytarget = mydoc->xml_reader(fileName);
-    mediator->setTarget(mytarget);
+    Mediator::Instance()->setTarget(mytarget);
     ui->loaded_target_label->setText("LOADED TARGET\n"+mytarget->getID());
     ui->loaded_target_label->setStyleSheet("background-color: green;");
 }
@@ -44,6 +42,7 @@ void MainWindow::on_bCommunication_clicked()
             ui->connection_label->setText("Remote Control");
         else if(ui->rManual->isChecked())
             ui->connection_label->setText("Manual Control");
+        ui->status_label->setText("Communication established");
         communication_enabled = true;
     }
     else{
@@ -83,4 +82,9 @@ void MainWindow::on_rManual_clicked()
     ui->acc_limit_control->setEnabled(true);
     ui->steering_control->setEnabled(true);
     ui->speed_control->setEnabled(true);
+}
+
+void MainWindow::on_bReferencePosition_clicked()
+{
+    Mediator::Instance()->execPositionDialog();
 }

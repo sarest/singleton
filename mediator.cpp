@@ -24,4 +24,7 @@ void Mediator::showWindowTarget()
     mediator_window_target->show();
 }
 
-
+void Mediator::execPositionDialog()
+{
+    mediator_position_dialog->exec();
+}
