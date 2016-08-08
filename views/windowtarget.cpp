@@ -27,6 +27,7 @@ void WindowTarget::loadTable()
     QList<Segment*> segment_list = mytarget->getSegment();
     QString velocity,acceleration,radius,x,y,time;
 
+    mytable->setItem(0, 3, new QTableWidgetItem(mytarget->getStartVelocity()));
     for(int i=0; i<segment_list.count(); i++){
         if(segment_list.at(i)->getType()=="straight"){
             velocity = segment_list.at(i)->getVelocity_straight();
@@ -34,6 +35,7 @@ void WindowTarget::loadTable()
             x = segment_list.at(i)->getX_straight();
             y = segment_list.at(i)->getY_straight();
             time = segment_list.at(i)->getTime_straight();
+            radius = "0";
         }
         else if(segment_list.at(i)->getType()=="curve"){
             radius = segment_list.at(i)->getRadius();
@@ -122,9 +124,10 @@ void WindowTarget::drawStraight()
     }
     view->scene->addLine(x0,y0,x1,y1,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
     view->scene->addEllipse(x1-5,y1-5,10,10,QPen(Qt::red),QBrush(Qt::red,Qt::SolidPattern));
+    qDebug()<<"rect angle"<<segment_list.last()->getAngle_straight();
 }
 
-void WindowTarget::drawCurve()
+void WindowTarget::drawCurve() //in progress...
 {
     Target *mytarget = Mediator::Instance()->getTarget();
     QList<Segment*> segment_list = mytarget->getSegment();
@@ -136,15 +139,20 @@ void WindowTarget::drawCurve()
         if(segment_list.at(segment_list.count()-2)->getType() == "straight"){
             x = segment_list.at(segment_list.count()-2)->getX_straight().toFloat();
             y = segment_list.at(segment_list.count()-2)->getY_straight().toFloat();
+            start_angle = segment_list.at(segment_list.count()-2)->getAngle_straight().toFloat();
         }
         else{
             x = segment_list.at(segment_list.count()-2)->getX_curve().toFloat();
             y = segment_list.at(segment_list.count()-2)->getY_curve().toFloat();
+            start_angle = segment_list.at(segment_list.count()-2)->getOutAngle_curve().toFloat();
         }
     }
     arc_path.moveTo(x,y);
     arc_path.arcTo(x,y,radius*2,radius*2,start_angle,-span_angle);
     view->scene->addPath(arc_path,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
+    qDebug()<<"start angle"<<start_angle;
+    qDebug()<<"span angle"<<span_angle;
+    qDebug()<<"out angle"<<segment_list.last()->getOutAngle_curve();
 }
 
 void WindowTarget::initTable()
@@ -198,12 +206,12 @@ void WindowTarget::on_bSave_clicked()
 
 void WindowTarget::on_bLoad_clicked()
 {
+    on_bClearTable_clicked();
     QWidget *ventana_load = new QWidget;
     QString fileName = QFileDialog::getOpenFileName(ventana_load,"Open file",QDir::currentPath(),"XML (*.xml)");
     Files *mydoc = Mediator::Instance()->getFiles();
     Target *mytarget = mydoc->xml_reader(fileName);
     Mediator::Instance()->setTarget(mytarget);
-    on_bClearTable_clicked();
     loadTable();
 }
 
@@ -282,6 +290,7 @@ void WindowTarget::on_bClearTable_clicked()
     cleanValues();
     ui->start_velocity->setEnabled(true);
     ui->start_velocity->setText("0");
+    mytable->setItem(0, 3, new QTableWidgetItem("0"));
     Target *mytarget = Mediator::Instance()->getTarget();
     mytarget->deleteTarget();
     view->scene->clear();

@@ -19,6 +19,7 @@ void Files::xml_writer(QString fileName)
     xmlWriter.writeStartDocument();
     xmlWriter.writeStartElement("target");
     xmlWriter.writeAttribute("id",mytarget->getID());
+    xmlWriter.writeAttribute("start_velocity",mytarget->getStartVelocity());
     if(!segment_list.isEmpty()){
         xmlWriter.writeStartElement("segments");
         for(int i=0; i<segment_list.count(); i++){
@@ -34,36 +35,60 @@ void Files::xml_writer(QString fileName)
                 xmlWriter.writeAttribute("id","radius");
                 xmlWriter.writeCharacters(segment_list.at(i)->getRadius());
                 xmlWriter.writeEndElement();
-                if(segment_list.at(i)->getVelocity_curve()!=""){
-                    xmlWriter.writeStartElement("parameter");
-                    xmlWriter.writeAttribute("id","velocity");
-                    xmlWriter.writeCharacters(segment_list.at(i)->getVelocity_curve());
-                    xmlWriter.writeEndElement();
-                }
-                else{
-                    xmlWriter.writeStartElement("parameter");
-                    xmlWriter.writeAttribute("id","acceleration");
-                    xmlWriter.writeCharacters(segment_list.at(i)->getAcceleration_curve());
-                    xmlWriter.writeEndElement();
-                }
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","x");
+                xmlWriter.writeCharacters(segment_list.at(i)->getX_curve());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","y");
+                xmlWriter.writeCharacters(segment_list.at(i)->getY_curve());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","time");
+                xmlWriter.writeCharacters(segment_list.at(i)->getTime_curve());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","velocity");
+                xmlWriter.writeCharacters(segment_list.at(i)->getVelocity_curve());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","acceleration");
+                xmlWriter.writeCharacters(segment_list.at(i)->getAcceleration_curve());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","out_angle");
+                xmlWriter.writeCharacters(segment_list.at(i)->getOutAngle_curve());
+                xmlWriter.writeEndElement();
             }
             else if(segment_list.at(i)->getType()=="straight"){
                 xmlWriter.writeStartElement("parameter");
                 xmlWriter.writeAttribute("id","length");
                 xmlWriter.writeCharacters(segment_list.at(i)->getLength());
                 xmlWriter.writeEndElement();
-                if(segment_list.at(i)->getVelocity_straight()!=""){
-                    xmlWriter.writeStartElement("parameter");
-                    xmlWriter.writeAttribute("id","velocity");
-                    xmlWriter.writeCharacters(segment_list.at(i)->getVelocity_straight());
-                    xmlWriter.writeEndElement();
-                }
-                else{
-                    xmlWriter.writeStartElement("parameter");
-                    xmlWriter.writeAttribute("id","acceleration");
-                    xmlWriter.writeCharacters(segment_list.at(i)->getAcceleration_straight());
-                    xmlWriter.writeEndElement();
-                }
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","x");
+                xmlWriter.writeCharacters(segment_list.at(i)->getX_straight());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","y");
+                xmlWriter.writeCharacters(segment_list.at(i)->getY_straight());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","time");
+                xmlWriter.writeCharacters(segment_list.at(i)->getTime_straight());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","velocity");
+                xmlWriter.writeCharacters(segment_list.at(i)->getVelocity_straight());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","acceleration");
+                xmlWriter.writeCharacters(segment_list.at(i)->getAcceleration_straight());
+                xmlWriter.writeEndElement();
+                xmlWriter.writeStartElement("parameter");
+                xmlWriter.writeAttribute("id","out_angle");
+                xmlWriter.writeCharacters(segment_list.at(i)->getAngle_straight());
+                xmlWriter.writeEndElement();
             }
             xmlWriter.writeEndElement(); //end of parameters
             xmlWriter.writeEndElement(); //end of segment
@@ -89,14 +114,14 @@ Target *Files::xml_reader(QString fileName)
     doc.setContent(&file);
     QDomElement docElem = doc.documentElement();
 
-    mytarget->setID(docElem.attributes().namedItem("id").nodeValue());
-
+    mytarget->setID(docElem.attributes().namedItem("id").nodeValue());   
+    mytarget->setStartVelocity(docElem.attributes().namedItem("start_velocity").nodeValue());
 
     QDomNodeList segment_nodelist = docElem.elementsByTagName("segment");
     if(segment_nodelist.count()>0){
         for(int i=0; i<segment_nodelist.count();i++){
             Segment *mysegment = new Segment;
-            QString length="",angle="",radius="",acceleration="",velocity="",x="",y="",time="";
+            QString length="",angle="",radius="",acceleration="",velocity="",x="",y="",time="",out_angle="";
             QDomNodeList segment_parameters = segment_nodelist.at(i).firstChild().childNodes();
             for(int j=0; j<segment_parameters.count(); j++){
                 if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="length")
@@ -109,11 +134,23 @@ Target *Files::xml_reader(QString fileName)
                     acceleration = segment_parameters.at(j).toElement().text();
                 if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="velocity")
                     velocity = segment_parameters.at(j).toElement().text();
+                if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="x")
+                    x = segment_parameters.at(j).toElement().text();
+                if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="y")
+                    y = segment_parameters.at(j).toElement().text();
+                if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="time")
+                    time = segment_parameters.at(j).toElement().text();
+                if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="out_angle")
+                    time = segment_parameters.at(j).toElement().text();
             }
-            if(segment_nodelist.at(i).attributes().namedItem("type").nodeValue()=="curve")
+            if(segment_nodelist.at(i).attributes().namedItem("type").nodeValue()=="curve"){
                 mysegment->setValues_curve("curve",angle,radius,acceleration,velocity,x,y,time);
-            else
+                mysegment->setOutAngle_curve(out_angle);
+            }
+            else{
                 mysegment->setValues_straight("straight",length,acceleration,velocity,x,y,time);
+                mysegment->setAngle_straight(out_angle);
+            }
 
             mytarget->addSegment(mysegment);
         }
