@@ -141,7 +141,7 @@ Target *Files::xml_reader(QString fileName)
                 if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="time")
                     time = segment_parameters.at(j).toElement().text();
                 if(segment_parameters.at(j).attributes().namedItem("id").nodeValue()=="out_angle")
-                    time = segment_parameters.at(j).toElement().text();
+                    out_angle = segment_parameters.at(j).toElement().text();
             }
             if(segment_nodelist.at(i).attributes().namedItem("type").nodeValue()=="curve"){
                 mysegment->setValues_curve("curve",angle,radius,acceleration,velocity,x,y,time);
@@ -158,3 +158,46 @@ Target *Files::xml_reader(QString fileName)
     file.close();
     return mytarget;
 }
+
+void Files::position_writer()
+{
+    QList<Position*> mylist = Mediator::Instance()->getPositions();
+    QFile file("/home/antgon/proyects_interface/interface_singleton/positions.xml");
+    file.open(QIODevice::WriteOnly);
+    QXmlStreamWriter xmlWriter(&file);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();
+    xmlWriter.writeStartElement("positions");
+    for(int i=0; i<mylist.count(); i++){
+        xmlWriter.writeStartElement("position");
+        xmlWriter.writeAttribute("name",mylist.at(i)->getName());
+        xmlWriter.writeAttribute("longitude",mylist.at(i)->getLongitude());
+        xmlWriter.writeAttribute("latitude",mylist.at(i)->getLatitude());
+        xmlWriter.writeAttribute("direction",mylist.at(i)->getDirection());
+        xmlWriter.writeAttribute("height",mylist.at(i)->getHeight());
+        xmlWriter.writeEndElement();
+    }
+    xmlWriter.writeEndElement();
+    xmlWriter.writeEndDocument();
+}
+
+void Files::position_reader()
+{
+    QFile file("/home/antgon/proyects_interface/interface_singleton/positions.xml");
+    file.open(QFile::ReadOnly);
+    QDomDocument doc("mydocument");
+    doc.setContent(&file);
+    QDomElement docElem = doc.documentElement();
+    QDomNodeList positions_nodelist = docElem.elementsByTagName("position");
+    if(positions_nodelist.count()>0){
+        for(int i=0; i<positions_nodelist.count(); i++){
+            Position *myposition = new Position;
+            myposition->setPosition(positions_nodelist.at(i).attributes().namedItem("name").nodeValue(),positions_nodelist.at(i).attributes().namedItem("longitude").nodeValue(),
+                                    positions_nodelist.at(i).attributes().namedItem("latitude").nodeValue(),positions_nodelist.at(i).attributes().namedItem("direction").nodeValue(),
+                                    positions_nodelist.at(i).attributes().namedItem("height").nodeValue());
+            Mediator::Instance()->addPosition(myposition);
+        }
+    }
+
+}
+

@@ -54,10 +54,10 @@
    <widget class="QPushButton" name="bSelect">
     <property name="geometry">
      <rect>
-      <x>594</x>
-      <y>214</y>
-      <width>80</width>
-      <height>23</height>
+      <x>600</x>
+      <y>50</y>
+      <width>71</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -197,14 +197,14 @@
      </layout>
     </item>
     <item row="2" column="1">
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="bApply">
       <property name="text">
        <string>APPLY</string>
       </property>
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="bCurrent">
       <property name="text">
        <string>Set Current Position</string>
       </property>
@@ -226,6 +226,20 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>name</tabstop>
+  <tabstop>longitude</tabstop>
+  <tabstop>latitude</tabstop>
+  <tabstop>direction</tabstop>
+  <tabstop>height</tabstop>
+  <tabstop>bApply</tabstop>
+  <tabstop>bCurrent</tabstop>
+  <tabstop>bSelect</tabstop>
+  <tabstop>bNew</tabstop>
+  <tabstop>bClose</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>bDelete</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

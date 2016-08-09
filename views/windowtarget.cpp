@@ -122,8 +122,8 @@ void WindowTarget::drawStraight()
             y0 = segment_list.at(segment_list.count()-2)->getY_curve().toFloat();
         }
     }
-    view->scene->addLine(x0,y0,x1,y1,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
-    view->scene->addEllipse(x1-5,y1-5,10,10,QPen(Qt::red),QBrush(Qt::red,Qt::SolidPattern));
+    //view->scene->addLine(x0,y0,x1,y1,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
+    //view->scene->addEllipse(x1-5,y1-5,10,10,QPen(Qt::red),QBrush(Qt::red,Qt::SolidPattern));
     qDebug()<<"rect angle"<<segment_list.last()->getAngle_straight();
 }
 
@@ -139,17 +139,17 @@ void WindowTarget::drawCurve() //in progress...
         if(segment_list.at(segment_list.count()-2)->getType() == "straight"){
             x = segment_list.at(segment_list.count()-2)->getX_straight().toFloat();
             y = segment_list.at(segment_list.count()-2)->getY_straight().toFloat();
-            start_angle = segment_list.at(segment_list.count()-2)->getAngle_straight().toFloat();
+            start_angle = segment_list.at(segment_list.count()-2)->getAngle_straight().toFloat()+90;
         }
         else{
             x = segment_list.at(segment_list.count()-2)->getX_curve().toFloat();
             y = segment_list.at(segment_list.count()-2)->getY_curve().toFloat();
-            start_angle = segment_list.at(segment_list.count()-2)->getOutAngle_curve().toFloat();
+            start_angle = segment_list.at(segment_list.count()-2)->getOutAngle_curve().toFloat()+90;
         }
     }
     arc_path.moveTo(x,y);
     arc_path.arcTo(x,y,radius*2,radius*2,start_angle,-span_angle);
-    view->scene->addPath(arc_path,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
+    //view->scene->addPath(arc_path,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
     qDebug()<<"start angle"<<start_angle;
     qDebug()<<"span angle"<<span_angle;
     qDebug()<<"out angle"<<segment_list.last()->getOutAngle_curve();

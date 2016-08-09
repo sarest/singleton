@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<positions>
+    <position name="position" longitude="1234" latitude="578" direction="" height=""/>
+    <position name="position2" longitude="" latitude="" direction="" height=""/>
+    <position name="position_actual" longitude="100" latitude="200" direction="45" height="10"/>
+</positions>

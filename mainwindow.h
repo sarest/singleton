@@ -35,6 +35,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     bool communication_enabled = false;
+    void disableOnStart();
+    void enableOnStop();
 };
 
 #endif // MAINWINDOW_H

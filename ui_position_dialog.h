@@ -51,8 +51,8 @@ public:
     QLabel *label_10;
     QLabel *label_11;
     QLabel *label_12;
-    QPushButton *pushButton_4;
-    QPushButton *pushButton;
+    QPushButton *bApply;
+    QPushButton *bCurrent;
     QPushButton *bClose;
 
     void setupUi(QDialog *position_dialog)
@@ -73,7 +73,7 @@ public:
         listWidget->setGeometry(QRect(10, 44, 578, 251));
         bSelect = new QPushButton(frame);
         bSelect->setObjectName(QStringLiteral("bSelect"));
-        bSelect->setGeometry(QRect(594, 214, 80, 23));
+        bSelect->setGeometry(QRect(600, 50, 71, 61));
         bNew = new QPushButton(frame);
         bNew->setObjectName(QStringLiteral("bNew"));
         bNew->setGeometry(QRect(594, 243, 80, 23));
@@ -167,19 +167,30 @@ public:
 
         gridLayout_2->addLayout(gridLayout, 1, 0, 1, 2);
 
-        pushButton_4 = new QPushButton(frame_2);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        bApply = new QPushButton(frame_2);
+        bApply->setObjectName(QStringLiteral("bApply"));
 
-        gridLayout_2->addWidget(pushButton_4, 2, 1, 1, 1);
+        gridLayout_2->addWidget(bApply, 2, 1, 1, 1);
 
-        pushButton = new QPushButton(frame_2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        bCurrent = new QPushButton(frame_2);
+        bCurrent->setObjectName(QStringLiteral("bCurrent"));
 
-        gridLayout_2->addWidget(pushButton, 2, 0, 1, 1);
+        gridLayout_2->addWidget(bCurrent, 2, 0, 1, 1);
 
         bClose = new QPushButton(position_dialog);
         bClose->setObjectName(QStringLiteral("bClose"));
         bClose->setGeometry(QRect(520, 400, 80, 51));
+        QWidget::setTabOrder(name, longitude);
+        QWidget::setTabOrder(longitude, latitude);
+        QWidget::setTabOrder(latitude, direction);
+        QWidget::setTabOrder(direction, height);
+        QWidget::setTabOrder(height, bApply);
+        QWidget::setTabOrder(bApply, bCurrent);
+        QWidget::setTabOrder(bCurrent, bSelect);
+        QWidget::setTabOrder(bSelect, bNew);
+        QWidget::setTabOrder(bNew, bClose);
+        QWidget::setTabOrder(bClose, listWidget);
+        QWidget::setTabOrder(listWidget, bDelete);
 
         retranslateUi(position_dialog);
 
@@ -203,8 +214,8 @@ public:
         label_10->setText(QApplication::translate("position_dialog", "\302\272 (north)", 0));
         label_11->setText(QApplication::translate("position_dialog", "\302\272 (0=north; >0=east)", 0));
         label_12->setText(QApplication::translate("position_dialog", "m", 0));
-        pushButton_4->setText(QApplication::translate("position_dialog", "APPLY", 0));
-        pushButton->setText(QApplication::translate("position_dialog", "Set Current Position", 0));
+        bApply->setText(QApplication::translate("position_dialog", "APPLY", 0));
+        bCurrent->setText(QApplication::translate("position_dialog", "Set Current Position", 0));
         bClose->setText(QApplication::translate("position_dialog", "CLOSE", 0));
     } // retranslateUi
 

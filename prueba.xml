@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<target id="prueba" start_velocity="0">
+<target id="" start_velocity="">
     <segments>
         <segment type="straight">
             <parameters>
                 <parameter id="length">100</parameter>
                 <parameter id="x">100</parameter>
                 <parameter id="y">0</parameter>
-                <parameter id="time">2</parameter>
-                <parameter id="velocity">360</parameter>
-                <parameter id="acceleration">50</parameter>
+                <parameter id="time">14.1421</parameter>
+                <parameter id="velocity">50.9117</parameter>
+                <parameter id="acceleration">1</parameter>
                 <parameter id="out_angle"></parameter>
             </parameters>
         </segment>
         <segment type="curve">
             <parameters>
-                <parameter id="angle">180</parameter>
+                <parameter id="angle">90</parameter>
                 <parameter id="radius">50</parameter>
-                <parameter id="x">0</parameter>
-                <parameter id="y">0</parameter>
-                <parameter id="time">3.55865</parameter>
-                <parameter id="velocity">365.611</parameter>
-                <parameter id="acceleration">1</parameter>
+                <parameter id="x">9999</parameter>
+                <parameter id="y">9999</parameter>
+                <parameter id="time">19.4932</parameter>
+                <parameter id="velocity">54.7645</parameter>
+                <parameter id="acceleration">0.2</parameter>
+                <parameter id="out_angle"></parameter>
+            </parameters>
+        </segment>
+        <segment type="straight">
+            <parameters>
+                <parameter id="length">100</parameter>
+                <parameter id="x">9999</parameter>
+                <parameter id="y">9999</parameter>
+                <parameter id="time">25.7669</parameter>
+                <parameter id="velocity">60</parameter>
+                <parameter id="acceleration">0.231809</parameter>
                 <parameter id="out_angle"></parameter>
             </parameters>
         </segment>
