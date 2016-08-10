@@ -21,19 +21,19 @@ public:
     void setWindowTarget(WindowTarget *window_target_instance){mediator_window_target = window_target_instance;}
     void setTarget(Target *target_instance){mediator_target = target_instance;}
     void setPositionDialog(position_dialog *dialog_instance){mediator_position_dialog = dialog_instance;}
-    void addPosition(Position *position_instance){mediator_position_list.append(position_instance);}
     void setPosition(QString position_name);
-
-    void addSegmentToTarget(Segment *segment_instance);
-    void showWindowTarget();
-    bool execPositionDialog();
-    void deletePosition(int position){mediator_position_list.removeAt(position);}
 
     Target *getTarget(){return mediator_target;}
     Files *getFiles(){return mediator_files;}
     Functions *getFunctions(){return mediator_functions;}
     QList<Position*> getPositions(){return mediator_position_list;}
     Position *getActualPosition(){return mediator_position;}
+
+    void addPosition(Position *position_instance){mediator_position_list.append(position_instance);}
+    void addSegmentToTarget(Segment *segment_instance);
+    void showWindowTarget();
+    bool execPositionDialog();
+    void deletePosition(int position){mediator_position_list.removeAt(position);}
 
 private:
     Mediator();

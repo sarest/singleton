@@ -19,6 +19,8 @@ position_dialog::~position_dialog()
     delete ui;
 }
 
+//Buttons
+
 void position_dialog::on_bClose_clicked()
 {
     position_dialog::close();
@@ -50,40 +52,6 @@ void position_dialog::on_bNew_clicked()
     ui->latitude->setText("0");
     ui->direction->setText("0");
     ui->height->setText("0");
-}
-
-bool position_dialog::checkPositionValues()
-{
-    bool exist = false;
-    QList<Position*> mylist = Mediator::Instance()->getPositions();
-    for(int i=0; i<mylist.count(); i++){
-        QString name = mylist.at(i)->getName();
-        if(ui->name->text() == name)
-            exist = true;
-    }
-    if(ui->name->text() != "" && !exist)
-        return true;
-    else
-        return false;
-}
-
-void position_dialog::showPositions()
-{
-    ui->listWidget->clear();
-    QList<Position*> mylist = Mediator::Instance()->getPositions();
-    for(int i=0; i<mylist.count(); i++){
-        ui->listWidget->addItem(mylist.at(i)->getName());
-    }
-}
-
-void position_dialog::cleanDialog()
-{
-    ui->name->clear();
-    ui->latitude->clear();
-    ui->longitude->clear();
-    ui->latitude->clear();
-    ui->direction->clear();
-    ui->height->clear();
 }
 
 void position_dialog::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
@@ -126,4 +94,40 @@ void position_dialog::on_bDelete_clicked()
         showPositions();
         cleanDialog();
     }
+}
+
+//Functions
+
+bool position_dialog::checkPositionValues()
+{
+    bool exist = false;
+    QList<Position*> mylist = Mediator::Instance()->getPositions();
+    for(int i=0; i<mylist.count(); i++){
+        QString name = mylist.at(i)->getName();
+        if(ui->name->text() == name)
+            exist = true;
+    }
+    if(ui->name->text() != "" && !exist)
+        return true;
+    else
+        return false;
+}
+
+void position_dialog::showPositions()
+{
+    ui->listWidget->clear();
+    QList<Position*> mylist = Mediator::Instance()->getPositions();
+    for(int i=0; i<mylist.count(); i++){
+        ui->listWidget->addItem(mylist.at(i)->getName());
+    }
+}
+
+void position_dialog::cleanDialog()
+{
+    ui->name->clear();
+    ui->latitude->clear();
+    ui->longitude->clear();
+    ui->latitude->clear();
+    ui->direction->clear();
+    ui->height->clear();
 }

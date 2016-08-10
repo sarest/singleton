@@ -34,6 +34,7 @@ void MainWindow::on_bLoadTarget_clicked()
     if(communication_enabled){
         ui->target_platform_label->setText("TARGET IN PLATFORM\nTarget loaded");
         ui->target_platform_label->setStyleSheet("background-color: green;");
+        target_loaded = true;
     }
 }
 
@@ -59,7 +60,7 @@ void MainWindow::on_bCommunication_clicked()
 
 void MainWindow::on_bStart_clicked()
 {
-    if(communication_enabled){
+    if(checkStartConditions()){
         ui->status_label->setText("Test in progress");
         ui->speed_label->setStyleSheet("background-color: green;");
         ui->speed_label->setText("0.00 km/h");
@@ -100,6 +101,7 @@ void MainWindow::on_bReferencePosition_clicked()
         ui->bReferencePosition->setStyleSheet("background-color: green;");
         QString name = Mediator::Instance()->getActualPosition()->getName();
         ui->bReferencePosition->setText("REFERENCE POSITION\n"+name);
+        reference_position = true;
     }
 }
 
@@ -136,4 +138,17 @@ void MainWindow::enableOnStop()
     ui->endless_check->setEnabled(true);
     ui->bNewTarget->setEnabled(true);
     ui->bLoadTarget->setEnabled(true);
+}
+
+bool MainWindow::checkStartConditions()
+{
+    if(communication_enabled && target_loaded && reference_position){
+        return true;
+    }
+    else{
+        QMessageBox errorBox;
+        errorBox.setText("Something is wrong");
+        errorBox.exec();
+        return false;
+    }
 }

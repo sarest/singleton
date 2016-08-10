@@ -42,7 +42,7 @@ private:
     void addRow(QString acceleration, QString velocity, QString radius, QString x, QString y, QString time);
     bool checkStartVelocity();
     QTableWidget *mytable;
-    MyQGraphicsView *view;
+    MyQGraphicsView *view, *length_view, *speed_view;
 
     void drawTarget();
 

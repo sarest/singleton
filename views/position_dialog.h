@@ -23,7 +23,6 @@ private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_bSelect_clicked();
     void on_bDelete_clicked();
-
     void on_bNew_clicked();
 
 private:

@@ -12,7 +12,11 @@ WindowTarget::WindowTarget(QWidget *parent) :
     ui->rAcceleration_straight->click();
     ui->rAcceleration_curve->click();
     view = new MyQGraphicsView;
+    speed_view = new MyQGraphicsView;
+    length_view = new MyQGraphicsView;
     ui->view_layout->addWidget(view);
+    ui->view_layout->addWidget(speed_view);
+    ui->view_layout->addWidget(length_view);
     set_grid();
 }
 
@@ -20,6 +24,8 @@ WindowTarget::~WindowTarget()
 {
     delete ui;
 }
+
+//Functions
 
 void WindowTarget::loadTable()
 {
@@ -112,9 +118,9 @@ void WindowTarget::drawTarget()
     Target *mytarget = Mediator::Instance()->getTarget();
     QList<Segment*> segment_list = mytarget->getSegment();
     QPainterPath path;
-    float k = 0.551915024494;
+    //float k = 0.551915024494;
     float x0 = 0,y0 = 0, x1, y1;
-    float radius;
+    //float radius;
     path.moveTo(x0,y0);
     for(int i=0; i<segment_list.count(); i++){
         if(segment_list.at(i)->getType() == "straight"){
@@ -125,7 +131,7 @@ void WindowTarget::drawTarget()
         else if(segment_list.at(i)->getType() == "curve"){
             x0 = path.currentPosition().x();
             y0 = path.currentPosition().y();
-            radius = segment_list.at(i)->getRadius().toFloat();
+            //radius = segment_list.at(i)->getRadius().toFloat();
             x1 = segment_list.at(i)->getX_curve().toFloat();
             y1 = segment_list.at(i)->getY_curve().toFloat();
             //path.quadTo(x0+radius,y0,x1,-y1);
@@ -152,12 +158,12 @@ void WindowTarget::initTable()
 
     QStringList lista_labels;
     lista_labels.append("ID");
-    lista_labels.append("Acceleration in m/s2");
-    lista_labels.append("Time in s");
-    lista_labels.append("End Velocity in km/h");
-    lista_labels.append("x in m");
-    lista_labels.append("y in m");
-    lista_labels.append("Radius in m");
+    lista_labels.append("Acceleration");
+    lista_labels.append("Time");
+    lista_labels.append("Velocity");
+    lista_labels.append("x");
+    lista_labels.append("y");
+    lista_labels.append("Radius");
     mytable->setHorizontalHeaderLabels(lista_labels);
 
     ui->table_layout->addWidget(mytable);
@@ -174,6 +180,36 @@ void WindowTarget::cleanValues()
     ui->straight_velocity->clear();
 }
 
+void WindowTarget::set_grid()
+{
+    //view->scene->setBackgroundBrush(QBrush(QPixmap(":/imgs/grid.png")));
+
+    /*for (int x=-90; x<=90; x+=10)
+        view->scene->addLine(x,-90,x,90, QPen(Qt::green,0.5,Qt::DashLine));
+    for (int y=-90; y<=90; y+=10)
+        view->scene->addLine(-90,y,90,y, QPen(Qt::green,0.5,Qt::DashLine));*/
+
+    view->scene->addLine(-10,0,10,0,QPen(Qt::red,1.5));
+    view->scene->addLine(0,-10,0,10,QPen(Qt::red,1.5));
+
+
+    /*for (int x=-1000; x<=1000; x+=100){
+        QGraphicsTextItem *meters = new QGraphicsTextItem;
+        meters->setPos(x,0);
+        meters->setPlainText(QString::number(x)+"m");
+        view->scene->addItem(meters);
+        view->scene->addLine(x,0,x,0);
+    }
+    for (int y=-1000; y<=1000; y+=100){
+        QGraphicsTextItem *meters = new QGraphicsTextItem;
+        meters->setPos(0,y);
+        meters->setPlainText(QString::number(-y)+"m");
+        view->scene->addItem(meters);
+        view->scene->addLine(0,y,0,y);
+    }*/
+}
+
+//Buttons
 
 void WindowTarget::on_bSave_clicked()
 {
@@ -265,7 +301,6 @@ void WindowTarget::on_rVelocity_curve_clicked()
     ui->curve_acceleration->setDisabled(true);
 }
 
-
 void WindowTarget::on_bClearTable_clicked()
 {
     int row_count = mytable->rowCount();
@@ -290,31 +325,3 @@ void WindowTarget::on_bDeleteLast_clicked()
     }
 }
 
-void WindowTarget::set_grid()
-{
-    //view->scene->setBackgroundBrush(QBrush(QPixmap(":/imgs/grid.png")));
-
-    /*for (int x=-90; x<=90; x+=10)
-        view->scene->addLine(x,-90,x,90, QPen(Qt::green,0.5,Qt::DashLine));
-    for (int y=-90; y<=90; y+=10)
-        view->scene->addLine(-90,y,90,y, QPen(Qt::green,0.5,Qt::DashLine));*/
-
-    view->scene->addLine(-10,0,10,0,QPen(Qt::red,1.5));
-    view->scene->addLine(0,-10,0,10,QPen(Qt::red,1.5));
-
-
-    /*for (int x=-1000; x<=1000; x+=100){
-        QGraphicsTextItem *meters = new QGraphicsTextItem;
-        meters->setPos(x,0);
-        meters->setPlainText(QString::number(x)+"m");
-        view->scene->addItem(meters);
-        view->scene->addLine(x,0,x,0);
-    }
-    for (int y=-1000; y<=1000; y+=100){
-        QGraphicsTextItem *meters = new QGraphicsTextItem;
-        meters->setPos(0,y);
-        meters->setPlainText(QString::number(-y)+"m");
-        view->scene->addItem(meters);
-        view->scene->addLine(0,y,0,y);
-    }*/
-}

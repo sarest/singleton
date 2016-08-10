@@ -101,6 +101,8 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(800, 600);
+        MainWindow->setMinimumSize(QSize(800, 600));
+        MainWindow->setMaximumSize(QSize(800, 600));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         gridLayout_5 = new QGridLayout(centralwidget);

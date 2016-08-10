@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include "items/target.h"
+#include "math.h"
 
 class Functions
 {

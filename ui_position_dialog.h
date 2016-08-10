@@ -60,6 +60,8 @@ public:
         if (position_dialog->objectName().isEmpty())
             position_dialog->setObjectName(QStringLiteral("position_dialog"));
         position_dialog->resize(702, 541);
+        position_dialog->setMinimumSize(QSize(702, 541));
+        position_dialog->setMaximumSize(QSize(702, 541));
         frame = new QFrame(position_dialog);
         frame->setObjectName(QStringLiteral("frame"));
         frame->setGeometry(QRect(9, 9, 684, 305));

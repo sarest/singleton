@@ -33,8 +33,10 @@ QT_BEGIN_NAMESPACE
 class Ui_WindowTarget
 {
 public:
-    QAction *actionMax_acceleration_in_m_s2;
     QWidget *centralwidget;
+    QWidget *widget;
+    QGridLayout *table_layout;
+    QWidget *widget1;
     QGridLayout *gridLayout_7;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
@@ -42,7 +44,6 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QPushButton *bLoad;
     QPushButton *bSave;
-    QGridLayout *view_layout;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_6;
     QLineEdit *start_velocity;
@@ -80,75 +81,83 @@ public:
     QRadioButton *rVelocity_curve;
     QPushButton *bConfirm_curve;
     QLabel *invalid_segment_label_curve;
+    QWidget *widget2;
+    QGridLayout *view_layout;
+    QWidget *widget3;
+    QHBoxLayout *horizontalLayout_4;
     QPushButton *bClearTable;
     QPushButton *bDeleteLast;
-    QGridLayout *table_layout;
     QMenuBar *menubar;
     QMenu *menuSet_Path;
     QMenu *menuCrashpoint;
     QMenu *menuLimitations;
-    QMenu *menuMax_velocity_in_km_h;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *WindowTarget)
     {
         if (WindowTarget->objectName().isEmpty())
             WindowTarget->setObjectName(QStringLiteral("WindowTarget"));
-        WindowTarget->resize(1062, 652);
-        actionMax_acceleration_in_m_s2 = new QAction(WindowTarget);
-        actionMax_acceleration_in_m_s2->setObjectName(QStringLiteral("actionMax_acceleration_in_m_s2"));
+        WindowTarget->resize(1070, 648);
+        WindowTarget->setMinimumSize(QSize(1070, 648));
+        WindowTarget->setMaximumSize(QSize(1070, 648));
         centralwidget = new QWidget(WindowTarget);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        gridLayout_7 = new QGridLayout(centralwidget);
+        widget = new QWidget(centralwidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(10, 285, 721, 281));
+        table_layout = new QGridLayout(widget);
+        table_layout->setObjectName(QStringLiteral("table_layout"));
+        table_layout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        table_layout->setContentsMargins(0, 0, 0, 0);
+        widget1 = new QWidget(centralwidget);
+        widget1->setObjectName(QStringLiteral("widget1"));
+        widget1->setGeometry(QRect(9, 9, 401, 268));
+        gridLayout_7 = new QGridLayout(widget1);
         gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
+        gridLayout_7->setContentsMargins(0, 0, 0, 0);
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        label = new QLabel(centralwidget);
+        label = new QLabel(widget1);
         label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
-        target_name = new QLineEdit(centralwidget);
+        target_name = new QLineEdit(widget1);
         target_name->setObjectName(QStringLiteral("target_name"));
 
         horizontalLayout->addWidget(target_name);
 
 
-        gridLayout_7->addLayout(horizontalLayout, 0, 0, 1, 2);
+        gridLayout_7->addLayout(horizontalLayout, 0, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        bLoad = new QPushButton(centralwidget);
+        bLoad = new QPushButton(widget1);
         bLoad->setObjectName(QStringLiteral("bLoad"));
 
         horizontalLayout_2->addWidget(bLoad);
 
-        bSave = new QPushButton(centralwidget);
+        bSave = new QPushButton(widget1);
         bSave->setObjectName(QStringLiteral("bSave"));
 
         horizontalLayout_2->addWidget(bSave);
 
 
-        gridLayout_7->addLayout(horizontalLayout_2, 0, 2, 1, 1);
-
-        view_layout = new QGridLayout();
-        view_layout->setObjectName(QStringLiteral("view_layout"));
-
-        gridLayout_7->addLayout(view_layout, 0, 3, 4, 1);
+        gridLayout_7->addLayout(horizontalLayout_2, 0, 1, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        label_6 = new QLabel(centralwidget);
+        label_6 = new QLabel(widget1);
         label_6->setObjectName(QStringLiteral("label_6"));
 
         horizontalLayout_3->addWidget(label_6);
 
-        start_velocity = new QLineEdit(centralwidget);
+        start_velocity = new QLineEdit(widget1);
         start_velocity->setObjectName(QStringLiteral("start_velocity"));
 
         horizontalLayout_3->addWidget(start_velocity);
 
-        label_11 = new QLabel(centralwidget);
+        label_11 = new QLabel(widget1);
         label_11->setObjectName(QStringLiteral("label_11"));
 
         horizontalLayout_3->addWidget(label_11);
@@ -158,12 +167,12 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        label_2 = new QLabel(centralwidget);
+        label_2 = new QLabel(widget1);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         verticalLayout->addWidget(label_2);
 
-        tabWidget = new QTabWidget(centralwidget);
+        tabWidget = new QTabWidget(widget1);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
         straight_tab = new QWidget();
         straight_tab->setObjectName(QStringLiteral("straight_tab"));
@@ -326,36 +335,40 @@ public:
         verticalLayout->addWidget(tabWidget);
 
 
-        gridLayout_7->addLayout(verticalLayout, 2, 0, 1, 3);
+        gridLayout_7->addLayout(verticalLayout, 2, 0, 1, 2);
 
-        bClearTable = new QPushButton(centralwidget);
+        widget2 = new QWidget(centralwidget);
+        widget2->setObjectName(QStringLiteral("widget2"));
+        widget2->setGeometry(QRect(740, 10, 311, 551));
+        view_layout = new QGridLayout(widget2);
+        view_layout->setObjectName(QStringLiteral("view_layout"));
+        view_layout->setContentsMargins(0, 0, 0, 0);
+        widget3 = new QWidget(centralwidget);
+        widget3->setObjectName(QStringLiteral("widget3"));
+        widget3->setGeometry(QRect(9, 576, 177, 25));
+        horizontalLayout_4 = new QHBoxLayout(widget3);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        bClearTable = new QPushButton(widget3);
         bClearTable->setObjectName(QStringLiteral("bClearTable"));
 
-        gridLayout_7->addWidget(bClearTable, 3, 0, 1, 1);
+        horizontalLayout_4->addWidget(bClearTable);
 
-        bDeleteLast = new QPushButton(centralwidget);
+        bDeleteLast = new QPushButton(widget3);
         bDeleteLast->setObjectName(QStringLiteral("bDeleteLast"));
 
-        gridLayout_7->addWidget(bDeleteLast, 3, 1, 1, 1);
-
-        table_layout = new QGridLayout();
-        table_layout->setObjectName(QStringLiteral("table_layout"));
-        table_layout->setSizeConstraint(QLayout::SetDefaultConstraint);
-
-        gridLayout_7->addLayout(table_layout, 4, 0, 1, 4);
+        horizontalLayout_4->addWidget(bDeleteLast);
 
         WindowTarget->setCentralWidget(centralwidget);
         menubar = new QMenuBar(WindowTarget);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1062, 20));
+        menubar->setGeometry(QRect(0, 0, 1070, 20));
         menuSet_Path = new QMenu(menubar);
         menuSet_Path->setObjectName(QStringLiteral("menuSet_Path"));
         menuCrashpoint = new QMenu(menubar);
         menuCrashpoint->setObjectName(QStringLiteral("menuCrashpoint"));
         menuLimitations = new QMenu(menubar);
         menuLimitations->setObjectName(QStringLiteral("menuLimitations"));
-        menuMax_velocity_in_km_h = new QMenu(menuLimitations);
-        menuMax_velocity_in_km_h->setObjectName(QStringLiteral("menuMax_velocity_in_km_h"));
         WindowTarget->setMenuBar(menubar);
         statusbar = new QStatusBar(WindowTarget);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -383,8 +396,6 @@ public:
         menubar->addAction(menuSet_Path->menuAction());
         menubar->addAction(menuCrashpoint->menuAction());
         menubar->addAction(menuLimitations->menuAction());
-        menuLimitations->addAction(actionMax_acceleration_in_m_s2);
-        menuLimitations->addAction(menuMax_velocity_in_km_h->menuAction());
 
         retranslateUi(WindowTarget);
 
@@ -397,7 +408,6 @@ public:
     void retranslateUi(QMainWindow *WindowTarget)
     {
         WindowTarget->setWindowTitle(QApplication::translate("WindowTarget", "Create Target", 0));
-        actionMax_acceleration_in_m_s2->setText(QApplication::translate("WindowTarget", "Max. acceleration in m/s2 ", 0));
         label->setText(QApplication::translate("WindowTarget", "Target Name", 0));
         bLoad->setText(QApplication::translate("WindowTarget", "LOAD", 0));
         bSave->setText(QApplication::translate("WindowTarget", "SAVE", 0));
@@ -427,7 +437,6 @@ public:
         menuSet_Path->setTitle(QApplication::translate("WindowTarget", "Set Path", 0));
         menuCrashpoint->setTitle(QApplication::translate("WindowTarget", "Crashpoint", 0));
         menuLimitations->setTitle(QApplication::translate("WindowTarget", "Limitations", 0));
-        menuMax_velocity_in_km_h->setTitle(QApplication::translate("WindowTarget", "Max. velocity in km/h", 0));
     } // retranslateUi
 
 };
