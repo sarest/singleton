@@ -338,12 +338,24 @@
     <property name="title">
      <string>Limitations</string>
     </property>
+    <widget class="QMenu" name="menuMax_velocity_in_km_h">
+     <property name="title">
+      <string>Max. velocity in km/h</string>
+     </property>
+    </widget>
+    <addaction name="actionMax_acceleration_in_m_s2"/>
+    <addaction name="menuMax_velocity_in_km_h"/>
    </widget>
    <addaction name="menuSet_Path"/>
    <addaction name="menuCrashpoint"/>
    <addaction name="menuLimitations"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionMax_acceleration_in_m_s2">
+   <property name="text">
+    <string>Max. acceleration in m/s2 </string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>target_name</tabstop>

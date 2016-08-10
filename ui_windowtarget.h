@@ -33,6 +33,7 @@ QT_BEGIN_NAMESPACE
 class Ui_WindowTarget
 {
 public:
+    QAction *actionMax_acceleration_in_m_s2;
     QWidget *centralwidget;
     QGridLayout *gridLayout_7;
     QHBoxLayout *horizontalLayout;
@@ -86,6 +87,7 @@ public:
     QMenu *menuSet_Path;
     QMenu *menuCrashpoint;
     QMenu *menuLimitations;
+    QMenu *menuMax_velocity_in_km_h;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *WindowTarget)
@@ -93,6 +95,8 @@ public:
         if (WindowTarget->objectName().isEmpty())
             WindowTarget->setObjectName(QStringLiteral("WindowTarget"));
         WindowTarget->resize(1062, 652);
+        actionMax_acceleration_in_m_s2 = new QAction(WindowTarget);
+        actionMax_acceleration_in_m_s2->setObjectName(QStringLiteral("actionMax_acceleration_in_m_s2"));
         centralwidget = new QWidget(WindowTarget);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         gridLayout_7 = new QGridLayout(centralwidget);
@@ -350,6 +354,8 @@ public:
         menuCrashpoint->setObjectName(QStringLiteral("menuCrashpoint"));
         menuLimitations = new QMenu(menubar);
         menuLimitations->setObjectName(QStringLiteral("menuLimitations"));
+        menuMax_velocity_in_km_h = new QMenu(menuLimitations);
+        menuMax_velocity_in_km_h->setObjectName(QStringLiteral("menuMax_velocity_in_km_h"));
         WindowTarget->setMenuBar(menubar);
         statusbar = new QStatusBar(WindowTarget);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -377,6 +383,8 @@ public:
         menubar->addAction(menuSet_Path->menuAction());
         menubar->addAction(menuCrashpoint->menuAction());
         menubar->addAction(menuLimitations->menuAction());
+        menuLimitations->addAction(actionMax_acceleration_in_m_s2);
+        menuLimitations->addAction(menuMax_velocity_in_km_h->menuAction());
 
         retranslateUi(WindowTarget);
 
@@ -389,6 +397,7 @@ public:
     void retranslateUi(QMainWindow *WindowTarget)
     {
         WindowTarget->setWindowTitle(QApplication::translate("WindowTarget", "Create Target", 0));
+        actionMax_acceleration_in_m_s2->setText(QApplication::translate("WindowTarget", "Max. acceleration in m/s2 ", 0));
         label->setText(QApplication::translate("WindowTarget", "Target Name", 0));
         bLoad->setText(QApplication::translate("WindowTarget", "LOAD", 0));
         bSave->setText(QApplication::translate("WindowTarget", "SAVE", 0));
@@ -418,6 +427,7 @@ public:
         menuSet_Path->setTitle(QApplication::translate("WindowTarget", "Set Path", 0));
         menuCrashpoint->setTitle(QApplication::translate("WindowTarget", "Crashpoint", 0));
         menuLimitations->setTitle(QApplication::translate("WindowTarget", "Limitations", 0));
+        menuMax_velocity_in_km_h->setTitle(QApplication::translate("WindowTarget", "Max. velocity in km/h", 0));
     } // retranslateUi
 
 };

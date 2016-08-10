@@ -105,54 +105,35 @@ bool WindowTarget::checkStartVelocity()
     }
 }
 
-void WindowTarget::drawStraight()
+void WindowTarget::drawTarget()
 {
+    view->scene->clear();
+    set_grid();
     Target *mytarget = Mediator::Instance()->getTarget();
     QList<Segment*> segment_list = mytarget->getSegment();
-    float x0 = 0,y0 = 0,x1 = 0,y1 = 0;
-    x1 = segment_list.last()->getX_straight().toFloat();
-    y1 = segment_list.last()->getY_straight().toFloat();
-    if(segment_list.count()>1){
-        if(segment_list.at(segment_list.count()-2)->getType() == "straight"){
-            x0 = segment_list.at(segment_list.count()-2)->getX_straight().toFloat();
-            y0 = segment_list.at(segment_list.count()-2)->getY_straight().toFloat();
+    QPainterPath path;
+    float k = 0.551915024494;
+    float x0 = 0,y0 = 0, x1, y1;
+    float radius;
+    path.moveTo(x0,y0);
+    for(int i=0; i<segment_list.count(); i++){
+        if(segment_list.at(i)->getType() == "straight"){
+            x1 = segment_list.at(i)->getX_straight().toFloat();
+            y1 = segment_list.at(i)->getY_straight().toFloat();
+            path.lineTo(x1,-y1);
         }
-        else{
-            x0 = segment_list.at(segment_list.count()-2)->getX_curve().toFloat();
-            y0 = segment_list.at(segment_list.count()-2)->getY_curve().toFloat();
-        }
-    }
-    //view->scene->addLine(x0,y0,x1,y1,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
-    //view->scene->addEllipse(x1-5,y1-5,10,10,QPen(Qt::red),QBrush(Qt::red,Qt::SolidPattern));
-    qDebug()<<"rect angle"<<segment_list.last()->getAngle_straight();
-}
-
-void WindowTarget::drawCurve() //in progress...
-{
-    Target *mytarget = Mediator::Instance()->getTarget();
-    QList<Segment*> segment_list = mytarget->getSegment();
-    QPainterPath arc_path;
-    float x=0,y=0,radius,start_angle=90,span_angle;
-    radius = segment_list.last()->getRadius().toFloat();
-    span_angle = segment_list.last()->getAngle().toFloat();
-    if(segment_list.count()>1){
-        if(segment_list.at(segment_list.count()-2)->getType() == "straight"){
-            x = segment_list.at(segment_list.count()-2)->getX_straight().toFloat();
-            y = segment_list.at(segment_list.count()-2)->getY_straight().toFloat();
-            start_angle = segment_list.at(segment_list.count()-2)->getAngle_straight().toFloat()+90;
-        }
-        else{
-            x = segment_list.at(segment_list.count()-2)->getX_curve().toFloat();
-            y = segment_list.at(segment_list.count()-2)->getY_curve().toFloat();
-            start_angle = segment_list.at(segment_list.count()-2)->getOutAngle_curve().toFloat()+90;
+        else if(segment_list.at(i)->getType() == "curve"){
+            x0 = path.currentPosition().x();
+            y0 = path.currentPosition().y();
+            radius = segment_list.at(i)->getRadius().toFloat();
+            x1 = segment_list.at(i)->getX_curve().toFloat();
+            y1 = segment_list.at(i)->getY_curve().toFloat();
+            //path.quadTo(x0+radius,y0,x1,-y1);
+            //path.cubicTo(x0+(x0*k),-y0,x1,-((y1*k)+y1),x1,-y1);
+            path.lineTo(x1,-y1);
         }
     }
-    arc_path.moveTo(x,y);
-    arc_path.arcTo(x,y,radius*2,radius*2,start_angle,-span_angle);
-    //view->scene->addPath(arc_path,QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap,Qt::RoundJoin));
-    qDebug()<<"start angle"<<start_angle;
-    qDebug()<<"span angle"<<span_angle;
-    qDebug()<<"out angle"<<segment_list.last()->getOutAngle_curve();
+    view->scene->addPath(path);
 }
 
 void WindowTarget::initTable()
@@ -212,7 +193,10 @@ void WindowTarget::on_bLoad_clicked()
     Files *mydoc = Mediator::Instance()->getFiles();
     Target *mytarget = mydoc->xml_reader(fileName);
     Mediator::Instance()->setTarget(mytarget);
+    ui->start_velocity->setText(mytarget->getStartVelocity());
+    ui->start_velocity->setDisabled(true);
     loadTable();
+    drawTarget();
 }
 
 void WindowTarget::on_bConfirm_straight_clicked()
@@ -228,7 +212,7 @@ void WindowTarget::on_bConfirm_straight_clicked()
             updateTable();
             cleanValues();
             ui->statusbar->showMessage("");
-            drawStraight();
+            drawTarget();
         }
     }
     else{
@@ -249,7 +233,7 @@ void WindowTarget::on_bConfirm_curve_clicked()
             updateTable();
             cleanValues();
             ui->statusbar->showMessage("");
-            drawCurve();
+            drawTarget();
         }
     }
     else{
@@ -315,8 +299,8 @@ void WindowTarget::set_grid()
     for (int y=-90; y<=90; y+=10)
         view->scene->addLine(-90,y,90,y, QPen(Qt::green,0.5,Qt::DashLine));*/
 
-    view->scene->addLine(-20,0,20,0,QPen(Qt::red,1.5));
-    view->scene->addLine(0,-20,0,20,QPen(Qt::red,1.5));
+    view->scene->addLine(-10,0,10,0,QPen(Qt::red,1.5));
+    view->scene->addLine(0,-10,0,10,QPen(Qt::red,1.5));
 
 
     /*for (int x=-1000; x<=1000; x+=100){

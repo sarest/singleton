@@ -43,8 +43,8 @@ private:
     bool checkStartVelocity();
     QTableWidget *mytable;
     MyQGraphicsView *view;
-    void drawStraight();
-    void drawCurve();
+
+    void drawTarget();
 
     void set_grid();
 };

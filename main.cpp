@@ -23,8 +23,8 @@ int main(int argc, char *argv[])
     main_mediator->setTarget(main_target);
     main_mediator->setPositionDialog(main_position_dialog);
 
-    MW->show();
-    //main_window_target->show();
+    //MW->show();
+    main_window_target->show();
 
     return a.exec();
 }
